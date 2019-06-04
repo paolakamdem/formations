@@ -1,0 +1,15 @@
+fr\utbm\formations\respository\LocationDao.class
+fr\utbm\formations\respository\CourseDao.class
+fr\utbm\formations\entity\Location.class
+fr\utbm\formations\respository\CourseSessionDao.class
+fr\utbm\formations\service\CourseSessionService.class
+fr\utbm\formations\respository\ClientDao.class
+fr\utbm\formations\entity\CourseSession.class
+fr\utbm\formations\controller\CourseSessionController.class
+fr\utbm\formations\entity\Client.class
+fr\utbm\formations\service\CourseService.class
+fr\utbm\formations\service\LocationService.class
+fr\utbm\formations\respository\IncludeDao.class
+fr\utbm\formations\controller\ClientController.class
+fr\utbm\formations\entity\Course.class
+fr\utbm\formations\service\ClientService.class
