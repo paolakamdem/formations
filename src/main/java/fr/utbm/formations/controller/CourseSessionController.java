@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
@@ -30,5 +31,22 @@ public class CourseSessionController {
        model.addAttribute("cours", session.all());
       return "index";
     }
+    
+/*    @RequestMapping(value="/session", method=RequestMethod.GET)
+    public void displaySession(){
+    }
+*/
+    @RequestMapping(value="/coursSession", method=RequestMethod.GET)    
+    public String displaySessionbyId(){
+        
+        return "";
+    }
+    
+    @RequestMapping(value="/coursDisplay", method=RequestMethod.POST)
+    public String displaySessionFilter(){
+        
+        return "";
+    }
+    
     
 }

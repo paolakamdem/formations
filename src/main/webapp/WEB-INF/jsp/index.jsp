@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
- pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" language="java" %> 
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,8 +55,7 @@
        <th>Nombres de places</th>
       </tr>
 
-      <!-- loop over and print our customers -->
-      <c:forEach var="v" items="${cours}">   
+      <!-- loop over and print our customers 
        <tr>
         <td>${v.courseCode.title}</td>
         <td>${v.locationId.city}</td>
@@ -67,8 +66,8 @@
 
         </tr>
 
-      </c:forEach>
-
+       
+-->
      </table>
 
     </div>

@@ -39,7 +39,6 @@ public class Client implements java.io.Serializable{
         this.lastName = lastName;
     }
     
-    
     @Column(name = "FIRSTNAME")
     private String firstName;
 
