@@ -7,7 +7,10 @@ package fr.utbm.formations.service;
 
 import fr.utbm.formations.entity.Client;
 import fr.utbm.formations.respository.ClientDao;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,14 +37,13 @@ public class ClientService {
     }
     
     public Client findClient(Integer id) {
-        return this.clientDao.FindClient(id);
+        return this.clientDao.findClient(id);
     }
     
     public void deleteClient(Integer id) {
         this.clientDao.deleteClient(id);
     }
 
-    
     
     
 }

@@ -2,6 +2,7 @@
 package fr.utbm.formations.entity;
 
 import java.util.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,11 +15,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+//import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(name = "COURSE_SESSION")
-@Proxy(lazy = false)
 public class CourseSession implements java.io.Serializable{
     
     @Id
@@ -37,21 +38,24 @@ public class CourseSession implements java.io.Serializable{
     @Column(name = "MAX_SESSION")
     private int max;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="CODECOURSE")
     private Course courseCode;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="IDLOCATION")    
     private Location locationId;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
     @JoinTable(
         name="INCLUDE",
         joinColumns=@JoinColumn(name="IDSESSION"),
         inverseJoinColumns=@JoinColumn(name="IDCLIENT")
     )
     private List<Client> clients; 
+    
+    
+
 
     public List<Client> getClients() {
         return clients;
@@ -135,7 +139,7 @@ public class CourseSession implements java.io.Serializable{
         return "CourseSession{" + "id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", max=" + max + ", courseCode=" + courseCode + ", locationId=" + locationId + '}';
     }
 
-   
+       
     
     
 }

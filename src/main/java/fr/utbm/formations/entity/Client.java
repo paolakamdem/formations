@@ -3,8 +3,10 @@ package fr.utbm.formations.entity;
 
 
 import java.util.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +17,6 @@ import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="client")
-@Proxy(lazy = false)
 public class Client implements java.io.Serializable{
     
     @Id
@@ -85,7 +86,7 @@ public class Client implements java.io.Serializable{
     }
 
     
-    @ManyToMany(mappedBy = "clients")
+    @ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH},mappedBy = "clients")
     private List<CourseSession> sessions;
     
     public List<CourseSession> getSessions() {

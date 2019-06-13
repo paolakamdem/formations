@@ -9,6 +9,7 @@ import fr.utbm.formations.entity.Course;
 import java.util.ArrayList;
 import java.util.List;
 import javax.transaction.Transactional;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -45,6 +46,9 @@ public class CourseDao {
     public List<Course> all(){
         Session session = this.sessionFactory.getCurrentSession();
         List<Course> course = session.createQuery("from Course").list();
+        for(Course c:course){
+            Hibernate.initialize(c.getSessions());            
+        }
         
         return course;
     }
@@ -52,16 +56,21 @@ public class CourseDao {
      public Course findById(Integer id) {
         Session session = this.sessionFactory.getCurrentSession();
         Course c = (Course) session.load(Course.class, id);
+        Hibernate.initialize(c.getSessions());
         return c;
     }
      
-         public  List<Course> getCourseByName(String courseName)
+    public  List<Course> getCourseByName(String courseName)
     {
         List<Course> courses = new ArrayList();
         Session session = this.sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM Course WHERE title like '%' || ? || '%'");
         query.setString(0, courseName);
         courses = query.list();
+        for(Course c:courses){
+            Hibernate.initialize(c.getSessions());
+        }
+        
         return courses;
     }
          

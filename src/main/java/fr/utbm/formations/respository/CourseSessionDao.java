@@ -5,11 +5,13 @@
  */
 package fr.utbm.formations.respository;
 
+import fr.utbm.formations.entity.Course;
 import fr.utbm.formations.entity.CourseSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -29,7 +31,16 @@ public class CourseSessionDao {
     public List<CourseSession> all(){
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from CourseSession");
-        return (List<CourseSession>)query.list();
+        
+        List<CourseSession> sessions = new ArrayList();
+        sessions = query.list();
+        
+        for(CourseSession s:sessions){
+            Hibernate.initialize(s.getClients());
+        }
+
+        return sessions;
+        
     }    
     
     public void addSession(CourseSession c){
@@ -45,6 +56,7 @@ public class CourseSessionDao {
     public CourseSession findById(Integer id) {
         Session session = this.sessionFactory.getCurrentSession();
         CourseSession c = (CourseSession) session.load(CourseSession.class, id);
+        Hibernate.initialize(c.getClients());
         return c;
     }
     
@@ -56,15 +68,20 @@ public class CourseSessionDao {
         }
     }
     
-    public List<CourseSession> getCourseSessionByLocation(String location)
+    /*public List<CourseSession> getCourseSessionByLocation(String location)
     {
         List<CourseSession> CourseSessions = new ArrayList();
         Session session = this.sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM CourseSession as CourseSession WHERE CourseSession.location.city like '%' || ? || '%'");
+        Query query = session.createQuery("FROM CourseSession as CourseSession WHERE CourseSession.location.city = ? ");
         query.setParameter(0, location);
         CourseSessions = query.list();
+        
+        for(CourseSession s:CourseSessions){
+            Hibernate.initialize(s.getClients());
+        }
+
         return CourseSessions;
-    }
+    }*/
     
     public  List<CourseSession> getCourseSessionByDate(Date dateSession)
     {
@@ -72,20 +89,30 @@ public class CourseSessionDao {
         Session session = this.sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM CourseSession as CourseSession WHERE CourseSession.startDate = ?");
         query.setParameter(0, dateSession);
-        query.setParameter(1,dateSession);
+        //query.setParameter(1,dateSession);
         CourseSessions = query.list();
+
+        for(CourseSession s:CourseSessions){
+            Hibernate.initialize(s.getClients());
+        }
+
         return CourseSessions;
     }
     
-    public List<CourseSession> getCourseSessionByLocationDate(String location,Date dateSession,String cours)
+   /* public List<CourseSession> getCourseSessionByLocationDate(String location,Date dateSession,String cours)
     {
         List<CourseSession> CourseSessions = new ArrayList();
         Session session = this.sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM CourseSession as CourseSession WHERE CourseSession.locationId.city like '%' || ? || '%' AND CourseSession.startDate = ? AND CourseSession.courseCode.title like '%' || ? || '%' ");
+        Query query = session.createQuery("FROM CourseSession as CourseSession WHERE CourseSession.locationId.city = ? AND CourseSession.startDate = ? AND CourseSession.courseCode.title like '%' || ? || '%' ");
         query.setParameter(0, location);
         query.setParameter(1,dateSession);
         query.setParameter(2,cours);
         CourseSessions = query.list();
+
+        for(CourseSession s:CourseSessions){
+            Hibernate.initialize(s.getClients());
+        }
+
         return CourseSessions;
-    }
+    }*/
 }

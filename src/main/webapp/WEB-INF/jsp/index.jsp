@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" language="java" %> 
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" 
+           uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
 <html>
@@ -22,7 +24,7 @@
      <div class="panel-title">Session des formations</div>
     </div>
     <div class="panel-body">
-<!--
+<%--<!--
      <table class="table table-striped table-bordered">
       <tr>
        <th>ID</th>
@@ -44,30 +46,18 @@
     
 
      </table>
--->
+-->--%>
   
      <table class="table table-striped table-bordered">
       <tr>
        <th>Liste des cours</th>
-       <th>ville</th>
-       <th>Date de debut</th>
-       <th>Date de fin</th>
-       <th>Nombres de places</th>
       </tr>
-
-      <!-- loop over and print our customers 
+      <c:forEach var="v" items="${locations}" >
        <tr>
-        <td>${v.courseCode.title}</td>
-        <td>${v.locationId.city}</td>
-        <td>${v.startDate}</td>
-        <td>${v.endDate}</td>
-        <td>${v.max}</td>
-        
-
+        <td>${v.city}</td>
         </tr>
 
-       
--->
+       </c:forEach>
      </table>
 
     </div>

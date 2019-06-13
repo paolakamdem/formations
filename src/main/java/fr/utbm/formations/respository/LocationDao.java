@@ -24,27 +24,28 @@ public class LocationDao {
     
     public List<Location> all(){
         Session session = sessionFactory.getCurrentSession();
-        Query query =  session.createQuery("from location");     
+        Query query =  session.createQuery("from Location");     
         return (List<Location>)query.list();
+
     }
     
-    public void addClient(Location c){
+    public void addLocation(Location c){
         Session session = this.sessionFactory.getCurrentSession();
         session.persist(c);
     }
     
-     public void updateClient(Location c){
+     public void updateLocation(Location c){
         Session session = this.sessionFactory.getCurrentSession();
         session.update(c);
     }
      
-    public Location FindClient(Integer id){
+    public Location findLocation(Integer id){
        Session session = this.sessionFactory.getCurrentSession();
         Location c = (Location) session.load(Location.class, id);
          return c;
     }
     
-    public void deleteClient(Integer id){
+    public void deleteLocation(Integer id){
           Session session = this.sessionFactory.getCurrentSession();
         Location c = (Location) session.load(Location.class, id);
         if (null != c) {

@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" language="java" %> 
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" 
+           uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -11,7 +12,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="<c:url value='css/main.css' />"> 
 </head>
 <body>
 
@@ -33,8 +34,9 @@
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                  <li class="active"><a href="#">Liste des cours</a></li>
+                  <li class="active"><a href="/formations/cours">Liste des cours</a></li>
 				  <li><a href="#">Créer un cours</a></li>
+				  <li><a href="/formations/session">Liste des sesions</a></li>                                  
                 </ul>
           <ul class="nav navbar-nav navbar-right">
               <li><a href="#"><span class="glyphicon glyphicon-user"></span> Connexion </a></li>
@@ -45,23 +47,30 @@
 
       <div class="container">    
         <div class="row">
-            <h2>Course name</h2>
+            <h2>${session.courseCode.title}</h2>
             <hr>
             <h3>Session</h3>
         </div>
         <div class="row">
-            <dl class="dl-horizontal">
-                <dt>Date de début :</dt>
-                <dd> date</dd>
-                <dt>Date de fin :</dt>
-                <dd> date</dd>
-                <dt>Lieu :</dt>
-                <dd> lieu</dd>
-                <dt>Nombre d'inscrits :</dt>
-                <dd> 20</dd>
+            <dl class="dl-horizontal" style="padding-top: 30px; padding-bottom: 20px">
+                <dt style="width: 200px">Date de début : </dt>
+                <dd> ${session.startDate}</dd>
+                <dt style="width: 200px">Date de fin : </dt>
+                <dd> ${session.endDate} </dd>
+                <dt style="width: 200px">Lieu  : </dt>
+                <dd> ${session.locationId.city}</dd>
+                <dt style="width: 200px">Nombre d'inscrits  : </dt>
+                <dd> ${session.clients.size() }</dd>
+                <dt style="width: 200px">Nombre d'inscrits maximum :</dt>
+                <dd> ${session.max }</dd>
             </dl>     
-            <a class="btn btn-default" href="#" role="button">S'inscrire</a>
+
+                <c:if test="${session.max > session.clients.size()}">
+            <a class="btn btn-default" href="/formations/cours/session/${session.id}/inscription" role="button">S'inscrire</a>
+                </c:if>
+                <c:if test="${session.max == session.clients.size()}">
             <a class="btn btn-danger" href="#" role="button">Inscription close</a>
+                </c:if> 
         </div>
       </div><br>
     

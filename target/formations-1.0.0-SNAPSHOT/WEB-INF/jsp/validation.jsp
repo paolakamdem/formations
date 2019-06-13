@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" language="java" %> 
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" 
+           uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -11,8 +12,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-  <link rel="stylesheet" href="css/main.css">
-</head>
+  <link rel="stylesheet" href="<c:url value='/WEB-IN/css/main.css' />">
+ </head>
 <body>
 
     <div class="jumbotron">
@@ -44,7 +45,7 @@
       </nav>
 
    <div class="container">    
-        <center><p>Vous avez bien été pré-inscrit au cours Patisserie</p></center>
+        <center><p>${client.firstName} ${client.lastName}, vous avez bien été pré-inscrit à la session du ${session.startDate} du cours ${session.courseCode.title}</p></center>
    </div><br>
 
     <footer class="container-fluid text-center" style="margin-top: 230px">

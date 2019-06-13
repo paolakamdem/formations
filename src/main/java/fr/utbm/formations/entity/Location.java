@@ -9,13 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.Proxy;
 
 
 
 @Entity
 @Table(name = "LOCATION")
-@Proxy(lazy = false)
 public class Location implements java.io.Serializable{
    
     @Id

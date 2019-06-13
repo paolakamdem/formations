@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" language="java" %> 
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
-
+<%@ taglib prefix="c" 
+           uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-  <link rel="stylesheet" href="<c:url value='pages/css/main.css' />" >
+    <link rel="stylesheet" href="<c:url value='css/main.css' />">
 </head>
 <body>
 
@@ -33,8 +34,9 @@
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                  <li class="active"><a href="#">Liste des cours</a></li>
-				  <li><a href="#">Crer un cours</a></li>
+                  <li class="active"><a href="/formations/cours">Liste des cours</a></li>
+				  <li><a href="#">Créer un cours</a></li>
+				  <li><a href="/formations/session">Liste des sesions</a></li>                                  
                 </ul>
           <ul class="nav navbar-nav navbar-right">
               <li><a href="#"><span class="glyphicon glyphicon-user"></span> Connexion </a></li>
@@ -45,50 +47,57 @@
     
 
       <div class="container">
-          <h2>Pré-inscription à une session de cours</h2>
+          <h2>Pré-inscription à la session du ${session.startDate} du cours ${session.courseCode.title}</h2>
       </div><br>
 
       <div class="container" style="padding-left: 100px">
-          <form class="form-horizontal" action="Course" method="POST" >
+          <form:form class="form-horizontal" action="/formations/register/${session.id}" method="POST" modelAttribute="client" >
             <div class="form-group row">
-
+               <%-- <form:input type="hidden" path="id" id="id" /> --%>
+                  <form:input type="hidden" path="sessions" id="session" /> 
               <div class="input-group col-sm-6">
                   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                  <input type="text" class="form-control" id="lastname" name="nom" placeholder="Nom">              </div>
+                  <form:input class="form-control"  path="lastName" placeholder="Nom" />
+                    <%--<form:errors path="address" element="div" cssClass="alert alert-warning"/>--%>
+              </div>
            </div>
             <div class="form-group row">
 
                 <div class="input-group col-sm-6">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Prénom">
+                    <form:input type="text" class="form-control" id="firstname" path="firstName" placeholder="Prénom" />
+                    <%--<form:errors path="address" element="div" cssClass="alert alert-warning"/>--%>
                 </div>
             </div>
             <div class="form-group row">
 
                 <div class="input-group col-sm-6">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                    <input id="email" type="email" class="form-control" name="email" placeholder="Email">
+                    <form:input id="email" type="email" class="form-control" path="eMail" placeholder="Email" />
+                    <%--<form:errors path="address" element="div" cssClass="alert alert-warning"/>--%>
                 </div>
             </div>
             <div class="form-group row">
 
                 <div class="input-group col-sm-6">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                    <input type="text" class="form-control" id="phone" name="email" placeholder="Téléphone 0999999999">
+                    <form:input type="text" class="form-control" id="phone" path="phone" placeholder="Téléphone " />
+                    <%--<form:errors path="address" element="div" cssClass="alert alert-warning"/>--%>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="input-group col-sm-6">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                    <input type="text" class="form-control" id="address" name="address" placeholder="Adresse ">
+                    <form:input type="text" class="form-control" id="address" path="address" placeholder="Adresse " />
+                    <%--<form:errors path="address" element="div" cssClass="alert alert-warning"/>--%>
                 </div>
             </div><br>
             <div class="form-group row"> 
                 <div >
-                    <button type="submit" class="btn btn-default" name="confirmer" value="confirmer"> Confirmer </button>				  
+                    <button type="submit" class="btn btn-default" name="validate" value="confirmer"> Confirmer </button>				  
                 </div>
             </div>
-          </form>
+          </form:form>
      </div><br>
       
       <footer class="container-fluid text-center">

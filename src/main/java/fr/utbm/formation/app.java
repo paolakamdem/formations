@@ -5,11 +5,11 @@
  */
 package fr.utbm.formation;
 
+import fr.utbm.formations.entity.Client;
 import fr.utbm.formations.service.ClientService;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * @author ornei
- */
 public class app {
 
     /**
@@ -19,7 +19,15 @@ public class app {
         // TODO code application logic here
         
         ClientService cs = new ClientService();
-        cs.all();
+        List<Client> list = cs.all();
+        for(Client c:list){
+        System.out.println(c.toString());
+        
+        
+        
+    }
+        
+        
     }
     
 }

@@ -39,7 +39,7 @@ public class ClientDao {
         session.update(c);
     }
     
-    public Client FindClient(Integer id){
+    public Client findClient(Integer id){
        Session session = this.sessionFactory.getCurrentSession();
         Client c = (Client) session.load(Client.class, id);
          return c;

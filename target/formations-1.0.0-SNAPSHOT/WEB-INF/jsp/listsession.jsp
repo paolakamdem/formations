@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" language="java" %> 
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" 
+           uri="http://java.sun.com/jsp/jstl/core"  %>
 
 <!DOCTYPE html>
 <html>
@@ -40,9 +41,9 @@
         <td>${ses.endDate}</td>
         <td>${ses.max}</td>
         <td>
-            XXX
+            ${ses.locationId}
         </td>
-
+        <td>${ses.clients}</td>
         </tr>
 
       </c:forEach>

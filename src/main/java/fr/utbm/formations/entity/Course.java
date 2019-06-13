@@ -16,7 +16,6 @@ import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(name="COURSE")
-@Proxy(lazy = false)
 public class Course implements java.io.Serializable{
 
     @Id
