@@ -36,9 +36,12 @@
                                 404 Not Found</h2>
                             <div class="error-details">
                                 Sorry, an error has occured, Requested page not found!
+                                ${status}
+                                <br>
+                                ${reason}
                             </div>
                             <div class="error-actions">
-                                <a href="#" class="btn btn-default btn-lg">
+                                <a href="/formations/cours" class="btn btn-default btn-lg">
                                     <span class="glyphicon glyphicon-home"></span>
                                     Take Me Home 
                                 </a>
@@ -48,9 +51,7 @@
                </div>
         </div>
 
-    <footer class="container-fluid text-center" style="margin-top: 230px">
-        <p>LO54 Copyright &copy;</p>  
-    </footer>
-
+    <jsp:include page="footer.jsp" />
+    
 </body>
 </html>

@@ -16,13 +16,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import javax.persistence.Temporal;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -39,10 +43,11 @@ public class CourseSessionController {
     @RequestMapping(value="/session")
     public String displaySession(Model model){
       model.addAttribute("sessions", session.all());
+      model.addAttribute("locations", location.all());    
       
       return "sessionDisplay";
     }
-
+    
     @RequestMapping(value="/session/filter")
     public String displaySessionFilter(HttpServletRequest req, Model model) throws ParseException{
      
@@ -51,9 +56,11 @@ public class CourseSessionController {
         String city = req.getParameter("city");
         String date = req.getParameter("date");
         
-        List<CourseSession> sessions = session.getCourseSessionFilter(city, date, title);
+
+        List<CourseSession> courseSessions = session.getCourseSessionFilter(city, title,date);    //.getCourseSessionByLocationTitle(city, title);    //.getCourseSessionByLocation(city);    //.getCourseSessionByDate(startdate);    //.getSessionFilterbyLocation(session.all(),city);    //.getCourseSessionFilter(city, date, title);
         
-        model.addAttribute("sessions", sessions);
+        model.addAttribute("sessions", courseSessions);
+        
         model.addAttribute("locations", location.all());    
         
       return "sessionDisplay";

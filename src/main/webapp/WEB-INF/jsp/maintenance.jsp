@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Site en Maintenance</title>
+  <title>Page en Maintenance</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -47,10 +47,8 @@
                 </div>
         </div>
 
-    <footer class="container-fluid text-center" >
-        <p>LO54 Copyright &copy;</p>  
-    </footer>
-
+    <jsp:include page="footer.jsp" />
+       
 </body>
 </html>
 

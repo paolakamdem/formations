@@ -10,6 +10,7 @@ fr\utbm\formations\entity\Client.class
 fr\utbm\formations\service\CourseService.class
 fr\utbm\formations\service\LocationService.class
 fr\utbm\formations\respository\IncludeDao.class
+fr\utbm\formations\controller\MaintenanceController.class
 fr\utbm\formations\controller\ClientController.class
 fr\utbm\formations\entity\Course.class
 fr\utbm\formations\service\ClientService.class

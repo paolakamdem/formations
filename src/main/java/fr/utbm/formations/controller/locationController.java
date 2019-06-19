@@ -6,6 +6,7 @@
 package fr.utbm.formations.controller;
 
 import fr.utbm.formations.service.LocationService;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  * @author ornei
  */
+
+@Controller
 public class locationController {
     
     

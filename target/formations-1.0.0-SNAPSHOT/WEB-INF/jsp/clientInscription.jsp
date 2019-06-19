@@ -12,44 +12,49 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="<c:url value='css/main.css' />">
+  <link rel="stylesheet" href="css/main.css">
+
+      <style>
+        
+        
+/* Remove the navbar's default rounded borders and increase the bottom margin */ 
+  .navbar {
+    margin-bottom: 50px;
+    border-radius: 0;
+  }
+  
+  /* Remove the jumbotron's default bottom margin */ 
+   .jumbotron {
+    margin-bottom: 0;
+  }
+ 
+  /* Add a gray background color and some padding to the footer */
+  footer {
+    background-color: #f2f2f2;
+    padding: 25px;
+  }
+
+  
+  a, a:focus,a:hover,a:visited,a:link, a:active {
+    text-decoration: none;
+    outline: none;
+  }
+
+    </style>
 </head>
 <body>
 
-    <div class="jumbotron">
-        <div class="container text-center">
-          <h1>Formation en Ligne</h1>      
-        </div>
-    </div>
-      
-      <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>                        
-            </button>
-            <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-education"></span></a>
-          </div>
-          <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                  <li class="active"><a href="/formations/cours">Liste des cours</a></li>
-				  <li><a href="#">Créer un cours</a></li>
-				  <li><a href="/formations/session">Liste des sesions</a></li>                                  
-                </ul>
-          <ul class="nav navbar-nav navbar-right">
-              <li><a href="#"><span class="glyphicon glyphicon-user"></span> Connexion </a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    
+      <jsp:include page="header.jsp" />    
 
-      <div class="container">
-          <h2>Pré-inscription à la session du ${session.startDate} du cours ${session.courseCode.title}</h2>
-      </div><br>
-
+      <div class="container">    
+        <div class="row">
+            <h2>Pré-inscription</h2>
+            <hr>
+            <h3>Cours : ${session.courseCode.title}</h3>
+            <h4>Session du ${session.startDate} au ${session.endDate}</h4><br>
+        </div>
+      </div>
+            
       <div class="container" style="padding-left: 100px">
           <form:form class="form-horizontal" action="/formations/register/${session.id}" method="POST" modelAttribute="client" >
             <div class="form-group row">
@@ -100,9 +105,7 @@
           </form:form>
      </div><br>
       
-      <footer class="container-fluid text-center">
-        <p>LO54 Copyright</p>  
-      </footer>
-
+     <jsp:include page="footer.jsp" />
+     
 </body>
 </html>

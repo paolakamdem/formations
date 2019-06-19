@@ -7,6 +7,8 @@ package fr.utbm.formations.respository;
 
 import fr.utbm.formations.entity.Course;
 import fr.utbm.formations.entity.CourseSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -67,52 +69,57 @@ public class CourseSessionDao {
             session.delete(c);
         }
     }
-    
-    /*public List<CourseSession> getCourseSessionByLocation(String location)
+     
+    public List<CourseSession> getCourseSessionByLocationTitle(String location,String title)
     {
-        List<CourseSession> CourseSessions = new ArrayList();
+     
+        //List<CourseSession> CourseSessions = new ArrayList();
         Session session = this.sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM CourseSession as CourseSession WHERE CourseSession.location.city = ? ");
+        Query query = session.createQuery("FROM CourseSession as CourseSession WHERE CourseSession.locationId.city like '%' || ? || '%' and CourseSession.courseCode.title like '%' || ? || '%' ");
         query.setParameter(0, location);
-        CourseSessions = query.list();
-        
-        for(CourseSession s:CourseSessions){
-            Hibernate.initialize(s.getClients());
-        }
-
-        return CourseSessions;
-    }*/
+        query.setParameter(1, title);
+        List<CourseSession> CourseSessions = query.list();
     
-    public  List<CourseSession> getCourseSessionByDate(Date dateSession)
-    {
-        List<CourseSession> CourseSessions = new ArrayList();
-        Session session = this.sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM CourseSession as CourseSession WHERE CourseSession.startDate = ?");
-        query.setParameter(0, dateSession);
-        //query.setParameter(1,dateSession);
-        CourseSessions = query.list();
-
         for(CourseSession s:CourseSessions){
             Hibernate.initialize(s.getClients());
         }
-
+    
         return CourseSessions;
     }
     
-   /* public List<CourseSession> getCourseSessionByLocationDate(String location,Date dateSession,String cours)
+    public  List<CourseSession> getCourseSessionByLocationTitleDate(String location,String title,String dateSession) throws ParseException
     {
-        List<CourseSession> CourseSessions = new ArrayList();
+        
         Session session = this.sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM CourseSession as CourseSession WHERE CourseSession.locationId.city = ? AND CourseSession.startDate = ? AND CourseSession.courseCode.title like '%' || ? || '%' ");
-        query.setParameter(0, location);
-        query.setParameter(1,dateSession);
-        query.setParameter(2,cours);
-        CourseSessions = query.list();
+        Query query = null;
+        if(!dateSession.equals("")){
+        
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date startdate = formatter.parse(dateSession);
+            System.out.println(startdate);
+                
+            query = session.createQuery("FROM CourseSession WHERE startDate=? and CourseSession.locationId.city like '%' || ? || '%' and CourseSession.courseCode.title like '%' || ? || '%' ");
+            query.setParameter(0, dateSession);
+            query.setParameter(1, location);
+            query.setParameter(2, title);
+        
+        }
+        else{
+        
+            query = session.createQuery("FROM CourseSession as CourseSession WHERE CourseSession.locationId.city like '%' || ? || '%' and CourseSession.courseCode.title like '%' || ? || '%' ");
+            query.setParameter(0, location);
+            query.setParameter(1, title);
+       
+        }
+        
+        List<CourseSession> CourseSessions = query.list();
 
         for(CourseSession s:CourseSessions){
             Hibernate.initialize(s.getClients());
         }
-
+        
         return CourseSessions;
-    }*/
+    }
+    
+
 }
